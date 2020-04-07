@@ -20,10 +20,10 @@ public final class StudentAttackerController implements AttackerController
 	private Node playerLocation;
 	private Node goal;
 	private List<Defender> ghostList;
-	private List<Node> vulGhosts;
+//	private List<Node> ghostLocations = new ArrayList<>(4);
 	private List<Node> availPillList;
 	private List<Node> powerPillList;
-	private List<Node> neighbors;
+//	private List<Node> neighbors;
 //	private int currentDirection;
 
 
@@ -48,10 +48,9 @@ public final class StudentAttackerController implements AttackerController
 		player = game.getAttacker();
 		playerLocation = player.getLocation();
 		powerPillList = game.getPowerPillList();
-		neighbors = player.getLocation().getNeighbors();
+		availPillList = game.getPillList();
+//		neighbors = player.getLocation().getNeighbors();
 //		currentDirection = player.getDirection();
-
-
 
 		if (pillMode) {
 
@@ -62,11 +61,26 @@ public final class StudentAttackerController implements AttackerController
 				// Check if neighbor is
 				for (Node p : powerPillList) {
 //					if (playerLocation.getNeighbor(currentDirection) == p) {
-					if (playerLocation.getPathDistance(p) < 5) {
+					if (playerLocation.getPathDistance(p) < 4) {
 						pillMode = false;
-						System.out.println("Entering CHILL MODE!");
+//						System.out.println("Entering CHILL MODE!");
 						chillMode = true;
 						break;
+					}
+				}
+			}
+			// Otherwise, head to pills!
+			else {
+				goal = player.getTargetNode(availPillList, true);
+			}
+
+			// If non-vulnerable ghost is close, RUN!
+			for (Defender d : ghostList) {
+				if (!d.isVulnerable()) {
+					int distancePlayerToGhost = playerLocation.getPathDistance(d.getLocation());
+					if (distancePlayerToGhost < 10 && distancePlayerToGhost > 0) {
+						action = player.getNextDir(d.getLocation(), false);
+						return action;
 					}
 				}
 			}
@@ -75,16 +89,13 @@ public final class StudentAttackerController implements AttackerController
 			return action;
 		}
 
-		else if (chillMode) {
+		if (chillMode) {
 			// If in chillMode, reverse direction every turn until
 			// Ghost is within 5 spaces
 			for (Defender d : ghostList) {
 				int distancePlayerToGhost = playerLocation.getPathDistance(d.getLocation());
-				System.out.println(distancePlayerToGhost);
 				if (distancePlayerToGhost < 10 && distancePlayerToGhost > 5) {
 					chillMode = false;
-					System.out.println("Entering KILL MODE!");
-					killMode = true;
 					break;
 				}
 			}
@@ -93,23 +104,53 @@ public final class StudentAttackerController implements AttackerController
 
 		}
 
-		else if (killMode) {
+		if (killMode) {
+
+			// Build list of vulnerable Ghosts
+			List<Node> ghostLocations = new ArrayList<>();
+			int index = 0;
 			for (Defender d : ghostList) {
 				if (d.isVulnerable()) {
-					vulGhosts.add(d.getLocation());
+					ghostLocations.add(d.getLocation());
+				}
+				index++;
+			}
+
+			// If no vulnerable ghosts left in killMode, exit
+			if (ghostLocations.size() == 0) {
+				killMode = false;
+				pillMode = true;
+//				System.out.println("Back to the PILLS! (xxx)");
+				action = player.getNextDir(goal, true);
+				return action;
+			}
+
+			// If non-vulnerable ghost is close, RUN!
+			for (Defender d : ghostList) {
+				if (!d.isVulnerable()) {
+					int distancePlayerToGhost = playerLocation.getPathDistance(d.getLocation());
+					if (distancePlayerToGhost < 10 && distancePlayerToGhost > 0) {
+						action = player.getNextDir(d.getLocation(), false);
+						return action;
+					}
 				}
 			}
-			action = player.getNextDir(player.getTargetNode(vulGhosts, true), true);
+
+			// killMode action is finding vulnerable ghosts and chomping them:
+			action = player.getNextDir(player.getTargetNode(ghostLocations, true), true);
 			return action;
 		}
 
+		// DEFAULT ACTION: ===============================================================================
+		// If neither pillMode, chillMode, or killMode, pursue the PILL:
+		for (Defender d : ghostList) {
+			if (d.isVulnerable()) {
+				killMode = true;
+//				System.out.println("KILL MODE TIME BABY!");
+			}
+		}
 
-
-
-
-
-		// DEFAULT ACTION ---------------------------------------------------------------------------------------------
-		action = 0;
+		action = player.getNextDir(goal, true);
 		return action;
 	}
 }
