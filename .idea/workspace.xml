@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f93a5615-1996-447b-b12e-b95e14866fc7" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/edu/ufl/cise/cs1/controllers/StudentAttackerControllerBACKUP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="f93a5615-1996-447b-b12e-b95e14866fc7" name="Default" comment="Update Controller Model">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/ufl/cise/cs1/controllers/StudentAttackerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ufl/cise/cs1/controllers/StudentAttackerController.java" afterDir="false" />
     </list>
@@ -464,8 +462,16 @@
       <workItem from="1586035076452" duration="4240000" />
       <workItem from="1586094362157" duration="6205000" />
       <workItem from="1586106915969" duration="24267000" />
-      <workItem from="1586182781951" duration="11194000" />
+      <workItem from="1586182781951" duration="14296000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial model of new Attacker Controller">
+      <created>1586220038762</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1586220038762</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -478,6 +484,11 @@
     <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
       <collection />
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial model of new Attacker Controller" />
+    <MESSAGE value="Update Controller Model" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Controller Model" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Project_Structure" timestamp="1586028101906">
@@ -492,6 +503,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="808" y="409" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586028106003" />
+    <state x="491" y="114" key="CommitChangelistDialog2" timestamp="1586227547270">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="491" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1586227547270" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1586038678656">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -500,22 +515,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="830" y="413" key="Github.ShareDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586216507672" />
-    <state width="1877" height="335" key="GridCell.Tab.0.bottom" timestamp="1586219377818">
+    <state width="1877" height="237" key="GridCell.Tab.0.bottom" timestamp="1586227547289">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="335" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586219377818" />
-    <state width="1877" height="335" key="GridCell.Tab.0.center" timestamp="1586219377818">
+    <state width="1877" height="237" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586227547289" />
+    <state width="1877" height="237" key="GridCell.Tab.0.center" timestamp="1586227547289">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="335" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586219377818" />
-    <state width="1877" height="335" key="GridCell.Tab.0.left" timestamp="1586219377818">
+    <state width="1877" height="237" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586227547289" />
+    <state width="1877" height="237" key="GridCell.Tab.0.left" timestamp="1586227547289">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="335" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586219377818" />
-    <state width="1877" height="335" key="GridCell.Tab.0.right" timestamp="1586219377818">
+    <state width="1877" height="237" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586227547289" />
+    <state width="1877" height="237" key="GridCell.Tab.0.right" timestamp="1586227547289">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="335" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586219377818" />
+    <state width="1877" height="237" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586227547289" />
     <state width="1877" height="347" key="GridCell.Tab.1.bottom" timestamp="1586028477015">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -536,6 +551,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586121640741" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1586220098541">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1586220098541" />
     <state x="769" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1586216435951">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

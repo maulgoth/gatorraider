@@ -17,10 +17,14 @@ public final class StudentAttackerController implements AttackerController
 	private boolean killMode = false;
 
 	private Attacker player;
+	private Node playerLocation;
 	private Node goal;
 	private List<Defender> ghostList;
+	private List<Node> vulGhosts;
 	private List<Node> availPillList;
 	private List<Node> powerPillList;
+	private List<Node> neighbors;
+//	private int currentDirection;
 
 
 	public void init(Game game) { }
@@ -42,15 +46,61 @@ public final class StudentAttackerController implements AttackerController
 		// UPDATE Ghosts and Player (Reduce verbosity)
 		ghostList = game.getDefenders();
 		player = game.getAttacker();
+		playerLocation = player.getLocation();
 		powerPillList = game.getPowerPillList();
-		System.out.println(powerPillList);
+		neighbors = player.getLocation().getNeighbors();
+//		currentDirection = player.getDirection();
+
+
 
 		if (pillMode) {
+
+			// If powerPills available, head to them
 			if (powerPillList.size() > 0) {
 				goal = player.getTargetNode(powerPillList, true);
-				action = player.getNextDir(goal, true);
-				return action;
+
+				// Check if neighbor is
+				for (Node p : powerPillList) {
+//					if (playerLocation.getNeighbor(currentDirection) == p) {
+					if (playerLocation.getPathDistance(p) < 5) {
+						pillMode = false;
+						System.out.println("Entering CHILL MODE!");
+						chillMode = true;
+						break;
+					}
+				}
 			}
+
+			action = player.getNextDir(goal, true);
+			return action;
+		}
+
+		else if (chillMode) {
+			// If in chillMode, reverse direction every turn until
+			// Ghost is within 5 spaces
+			for (Defender d : ghostList) {
+				int distancePlayerToGhost = playerLocation.getPathDistance(d.getLocation());
+				System.out.println(distancePlayerToGhost);
+				if (distancePlayerToGhost < 10 && distancePlayerToGhost > 5) {
+					chillMode = false;
+					System.out.println("Entering KILL MODE!");
+					killMode = true;
+					break;
+				}
+			}
+			action = player.getReverse();
+			return action;
+
+		}
+
+		else if (killMode) {
+			for (Defender d : ghostList) {
+				if (d.isVulnerable()) {
+					vulGhosts.add(d.getLocation());
+				}
+			}
+			action = player.getNextDir(player.getTargetNode(vulGhosts, true), true);
+			return action;
 		}
 
 
