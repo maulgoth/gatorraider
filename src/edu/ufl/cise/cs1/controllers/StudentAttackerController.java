@@ -11,29 +11,20 @@ import java.util.ArrayList;
 
 public final class StudentAttackerController implements AttackerController
 {
-
 	private boolean pillMode = true;
 	private boolean chillMode = false;
 	private boolean killMode = false;
-
 	private Attacker player;
 	private Node playerLocation;
 	private Node goal;
 	private List<Defender> ghostList;
-//	private List<Node> ghostLocations = new ArrayList<>(4);
 	private List<Node> availPillList;
 	private List<Node> powerPillList;
-//	private List<Node> neighbors;
-//	private int currentDirection;
-
-
 	public void init(Game game) { }
-
 	public void shutdown(Game game) { }
 
 	public int update(Game game,long timeDue) {
 		// 0 - UP | 1 - RIGHT | 2 - DOWN | 3 - LEFT
-
 		int action;
 
 		// LOGIC:
@@ -49,30 +40,24 @@ public final class StudentAttackerController implements AttackerController
 		playerLocation = player.getLocation();
 		powerPillList = game.getPowerPillList();
 		availPillList = game.getPillList();
-//		neighbors = player.getLocation().getNeighbors();
-//		currentDirection = player.getDirection();
 
 		if (pillMode) {
-
 			// If powerPills available, head to them
 			if (powerPillList.size() > 0) {
 				goal = player.getTargetNode(powerPillList, true);
 
 				// Check if neighbor is
 				for (Node p : powerPillList) {
-//					if (playerLocation.getNeighbor(currentDirection) == p) {
 					if (playerLocation.getPathDistance(p) < 4) {
 						pillMode = false;
-//						System.out.println("Entering CHILL MODE!");
 						chillMode = true;
 						break;
 					}
 				}
 			}
 			// Otherwise, head to pills!
-			else {
+			else
 				goal = player.getTargetNode(availPillList, true);
-			}
 
 			// If non-vulnerable ghost is close, RUN!
 			for (Defender d : ghostList) {
@@ -84,7 +69,6 @@ public final class StudentAttackerController implements AttackerController
 					}
 				}
 			}
-
 			action = player.getNextDir(goal, true);
 			return action;
 		}
@@ -101,18 +85,15 @@ public final class StudentAttackerController implements AttackerController
 			}
 			action = player.getReverse();
 			return action;
-
 		}
 
 		if (killMode) {
-
 			// Build list of vulnerable Ghosts
 			List<Node> ghostLocations = new ArrayList<>();
 			int index = 0;
 			for (Defender d : ghostList) {
-				if (d.isVulnerable()) {
+				if (d.isVulnerable())
 					ghostLocations.add(d.getLocation());
-				}
 				index++;
 			}
 
@@ -144,12 +125,9 @@ public final class StudentAttackerController implements AttackerController
 		// DEFAULT ACTION: ===============================================================================
 		// If neither pillMode, chillMode, or killMode, pursue the PILL:
 		for (Defender d : ghostList) {
-			if (d.isVulnerable()) {
+			if (d.isVulnerable())
 				killMode = true;
-//				System.out.println("KILL MODE TIME BABY!");
-			}
 		}
-
 		action = player.getNextDir(goal, true);
 		return action;
 	}
